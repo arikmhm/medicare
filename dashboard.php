@@ -6,13 +6,13 @@ if (!isset($_SESSION['username'])) {
 }
 require "fungsi.php";
 
-// Statistik Dasar
+
 $total_pasien = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM pasien"))['total'];
 $total_dokter = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM dokter"))['total'];
 $total_obat = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM obat"))['total'];
 $obat_menipis = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM obat WHERE stok < 10"))['total'];
 
-// Get statistik jenis kelamin
+
 $gender_stats = mysqli_fetch_assoc(mysqli_query($koneksi, "
     SELECT 
         SUM(CASE WHEN jenis_kelamin = 'L' THEN 1 ELSE 0 END) as total_male,
@@ -20,7 +20,7 @@ $gender_stats = mysqli_fetch_assoc(mysqli_query($koneksi, "
     FROM pasien
 "));
 
-// Get statistik dokter berdasarkan spesialisasi
+
 $spesialisasi_query = mysqli_query($koneksi, "SELECT spesialisasi, COUNT(*) as count FROM dokter GROUP BY spesialisasi");
 $spesialisasi_labels = [];
 $spesialisasi_data = [];
@@ -29,7 +29,7 @@ while ($row = mysqli_fetch_assoc($spesialisasi_query)) {
     $spesialisasi_data[] = $row['count'];
 }
 
-// Get statistik obat berdasarkan jenis
+
 $jenis_obat_query = mysqli_query($koneksi, "SELECT jenis_obat, COUNT(*) as count FROM obat GROUP BY jenis_obat");
 $jenis_obat_labels = [];
 $jenis_obat_data = [];
@@ -38,7 +38,7 @@ while ($row = mysqli_fetch_assoc($jenis_obat_query)) {
     $jenis_obat_data[] = $row['count'];
 }
 
-// Get data terbaru
+
 $latest_patients = mysqli_query($koneksi, "SELECT * FROM pasien ORDER BY created_at DESC LIMIT 5");
 $latest_doctors = mysqli_query($koneksi, "SELECT * FROM dokter ORDER BY created_at DESC LIMIT 5");
 $stok_menipis = mysqli_query($koneksi, "SELECT * FROM obat WHERE stok < 10 ORDER BY stok ASC LIMIT 5");
