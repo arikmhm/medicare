@@ -142,8 +142,6 @@ medicare/
 
 ## Kontribusi
 
-Kelompok 1
-
 ## Lisensi
 
 MIT License
