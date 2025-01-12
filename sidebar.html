@@ -1,0 +1,52 @@
+<div class="menusamping">
+  <div class="logo-section">
+    <div class="brand-text">MediCare</div>
+    <div class="brand-subtext">Healthcare System</div>
+  </div>
+
+  <div class="menu-items">
+    <a href="dashboard.php" class="menu-item">
+      <i class="fas fa-home"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="pasien.php" class="menu-item">
+      <i class="fas fa-user-injured"></i>
+      <span>Pasien</span>
+    </a>
+    <a href="dokter.php" class="menu-item">
+      <i class="fas fa-user-md"></i>
+      <span>Dokter</span>
+    </a>
+    <a href="obat.php" class="menu-item">
+      <i class="fas fa-pills"></i>
+      <span>Obat</span>
+    </a>
+    <a href="logout.php" class="menu-item logout-button">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+
+  <div class="sidebar-footer">
+    <p class="made-with">MediCare - Healthcare Management System</p>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuItems = document.querySelectorAll(".menu-item");
+    const currentPath = window.location.pathname;
+
+    menuItems.forEach((item) => {
+      const href = item.getAttribute("href");
+      if (href && currentPath.includes(href)) {
+        item.classList.add("active");
+      }
+
+      item.addEventListener("click", function (e) {
+        menuItems.forEach((mi) => mi.classList.remove("active"));
+        this.classList.add("active");
+      });
+    });
+  });
+</script>
